@@ -3,7 +3,8 @@ from setuptools import setup, find_packages
 
 setup(
     name='overloaded-iterables',
-    version='0.5',
+    version='0.5.1',
+    description="Overloaded version of the built-in python classes: <list> and <set> to include some extra functionalities.",
     license='MIT',
     author="Prithoo Medhi",
     author_email='prithoo11335@gmail.com',
@@ -20,7 +21,5 @@ setup(
         'mean',
         'sort'
     ],
-    install_requires=[
-        
-      ],
+    install_requires=[],
 )
