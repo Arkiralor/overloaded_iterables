@@ -1,8 +1,6 @@
 # Overloaded Iterables
 
-Overloaded version of the built-in python classes: `<list>` and `<set>` to include some extra functionalities as an experiment.
-
-The current iteration contains the following classes
+Overloaded versions of the built-in python classes: `<list>` and `<set>` to include some extra functionalities as an experiment.
 
 ## Specifications
 
@@ -22,6 +20,8 @@ python -m pip install overloaded-iterables
 ```
 
 ## Classes
+
+The current iteration contains the following classes
 
 ### 1. OverloadedList
 
@@ -123,7 +123,7 @@ obj = OverloadedList(*args)
         ```
 
 8. `<class>.hist()`&nbsp;&nbsp;&nbsp;&nbsp;__(OverloadedList only)__
-    - Plots the histogram of the frequency distribution of the elements in the OverloadedList.
+    - Plots the [histogram](https://en.wikipedia.org/wiki/Histogram) of the frequency distribution of the elements in the OverloadedList.
     - Arguments: `self`, `bins: int | default: 10`, `title: str | default: 'Histogram'`, `x_label: str | default: 'Values --->'`, `y_label: str | default: 'Frequencies --->'`, `save_dir: str | default: None`, `file_name: str | default: None`, `histtype: str | default: 'step'`, `align: str | default: 'mid'`, `orientation: str | default: 'vertical'`, `log_scale: bool | default: False`, `show: bool | default: False`
     - Process:
         - Shows the generated figure if `show` is set to `True`
@@ -132,11 +132,11 @@ obj = OverloadedList(*args)
     - Example:
 
         ```python
-            fig_check:float = obj.hist(show=True, save_dir='figures', file_name='some-figure')
+            fig_check:bool = obj.hist(show=True, save_dir='figures', file_name='some-figure')
         ```
 
 9. `<class>.plot()`&nbsp;&nbsp;&nbsp;&nbsp;__(OverloadedList only)__
-    - Plots the lineplot of the frequency distribution of the elements in the OverloadedList.
+    - Plots the [lineplot](https://en.wikipedia.org/wiki/Line_chart) of the frequency distribution of the elements in the OverloadedList.
     - Arguments: `self`, `title: str | default: 'Line Plot'`, `x_label: str | default: 'Values --->'`, `y_label: str | default: 'Frequencies --->'`, `save_dir: str | default: None`, `file_name: str | default: None`, `color: str | default: '#000000'`, `linewidth: float | default: 1`, `marker: str | default: ','`,  `markerfacecolor: str | default: '#252525'`, `marker_size: float | default: 1.0`, `show: bool | default: False`
     - Process:
         - Shows the generated figure if `show` is set to `True`
@@ -145,11 +145,11 @@ obj = OverloadedList(*args)
     - Example:
 
         ```python
-            fig_check:float = obj.plot(show=True, save_dir='figures', file_name='some-figure')
+            fig_check:bool = obj.plot(show=True, save_dir='figures', file_name='some-figure')
         ```
 
 10. `<class>.scatter()`&nbsp;&nbsp;&nbsp;&nbsp;__(OverloadedList only)__
-    - Plots the scatterplot of the frequency distribution of the elements in the OverloadedList.
+    - Plots the [scatterplot](https://en.wikipedia.org/wiki/Scatter_plot) of the frequency distribution of the elements in the OverloadedList.
     - Arguments: `self`, `title: str | default: 'Scatter Plot'`, `x_label: str | default: 'Values --->'`, `y_label: str | default: 'Frequencies --->'`, `save_dir: str | default: None`, `file_name: str | default: None`, `size: List[float] | default: [1.25]`, `color: str | default: '#000000'`, `marker: str | default: ','`, `line_width: float | default: 2`, `show: bool | default: False`
     - Process:
         - Shows the generated figure if `show` is set to `True`
@@ -158,7 +158,7 @@ obj = OverloadedList(*args)
     - Example:
 
         ```python
-            fig_check:float = obj.scatter(show=True, save_dir='figures', file_name='some-figure')
+            fig_check:bool = obj.scatter(show=True, save_dir='figures', file_name='some-figure')
         ```
 
 11. `<class>.len (property)`

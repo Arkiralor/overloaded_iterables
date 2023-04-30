@@ -13,7 +13,7 @@ def read(fname:str='README.md'):
 
 setup(
     name='overloaded-iterables',
-    version='0.6',
+    version='0.6.1',
     description="Overloaded version of the built-in python classes: list and set to include some extra functionalities.",
     long_description=read('README.md'),
     long_description_content_type='text/markdown',
@@ -50,7 +50,7 @@ setup(
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Topic :: Utilities",
-        "License :: OSI Approved :: BSD License",
+        "License :: OSI Approved :: MIT License",
     ],
 )
 
