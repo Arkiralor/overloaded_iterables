@@ -7,8 +7,8 @@ The current iteration contains the following classes
 ## Specifications
 
 1. __Python Version:__ Python v3.8+
-2. __Code Coverage:__ ![_code coverage_](media\screenshots\coverage.PNG)
-3. __Tests Status:__ ![_test status_](media\screenshots\test_results.PNG)
+2. __Code Coverage:__ ![_code coverage_](https://github.com/Arkiralor/overloaded_iterables/blob/master/media/screenshots/coverage.PNG?raw=true)
+3. __Tests Status:__ ![_test status_](https://github.com/Arkiralor/overloaded_iterables/blob/master/media/screenshots/test_results.PNG?raw=true)
 
 ## Python Package Index
 
