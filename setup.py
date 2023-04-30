@@ -22,7 +22,9 @@ setup(
         'mean',
         'sort'
     ],
-    install_requires=[],
+    install_requires=[
+        "numpy"
+    ],
 )
 
 if __name__=="__main__":
