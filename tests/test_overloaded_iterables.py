@@ -92,6 +92,15 @@ class TestOverloadedList(unittest.TestCase):
 
         self.assertEqual(self.ARR_1.rms(), root_mean_squared)
 
+    def test_hist(self):
+        self.assertTrue(self.ARR_1.hist())
+    
+    def test_plot(self):
+        self.assertTrue(self.ARR_1.plot())
+
+    def test_scatter(self):
+        self.assertTrue(self.ARR_1.scatter())
+
 
 class TestOverloadedSet(unittest.TestCase):
     """

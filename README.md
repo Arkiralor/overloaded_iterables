@@ -57,9 +57,29 @@ obj = OverloadedList(*args)
             _mean: float = obj.mean()
         ```
 
-2. `<class>.sort()`
+2. `<class>.sum()`
+    - Claculate the sum of all the elements in the given iterable class object.
+    - Arguments: `self`
+    - Returns: `float (64-bit)`
+    - Example:
+
+        ```python
+            _sum: float = obj.sum()
+        ```
+
+3. `<class>.prod()`
+    - Calculate the product of all the elements in the given iterable class object.
+    - Arguments: `self`
+    - Returns: `float (64-bit)`
+    - Example:
+
+        ```python
+            _product: float = obj.prod()
+        ```
+
+4. `<class>.sort()`
     - Sorts the contents of the given iterable class object via the [Timsort](https://en.wikipedia.org/wiki/Timsort) sorting algorithm.
-    - Arguments: `self`, `reverse:bool | default: False`
+    - Arguments: `self`, `key: None | default: None`, `reverse: bool | default: False`
     - Returns `object: <list>`
     - Example:
 
@@ -67,7 +87,7 @@ obj = OverloadedList(*args)
             sorted_seq: list = obj.sort()
         ```
 
-3. `<class>.raise_to()`
+5. `<class>.raise_to()`
     - Raises each element in the iterable class object to the given power.
     - Arguments: `self`, `power: float (64-bit) | default: 1.0`
     - Returns `object: <class>`
@@ -82,9 +102,9 @@ obj = OverloadedList(*args)
             _raised_sequence: type(obj) = obj.raise_to(power=z)
         ```
 
-4. `<class>.rms()`
+6. `<class>.rms()`
     - Finds the [Root-Mean-Square (RMS)](https://en.wikipedia.org/wiki/Root_mean_square) of the values in the current iterable class object.
-    - Arguments: `self`
+    - Arguments: `self`, `power: float | default: 2`, `root: int | default: 2`
     - Returns: `float (64-bit)`
     - Example:
 
@@ -92,7 +112,7 @@ obj = OverloadedList(*args)
             _rms: float = obj.rms()
         ```
 
-5. `<class>.median()`
+7. `<class>.median()`
     - Finds the [median](https://en.wikipedia.org/wiki/Median) of the contents of the given iterable class object.
     - Arguments: `self`
     - Returns: `float (64-bit)`
@@ -102,7 +122,46 @@ obj = OverloadedList(*args)
             _median:float = obj.median()
         ```
 
-6. `<class>.len (property)`
+8. `<class>.hist()`&nbsp;&nbsp;&nbsp;&nbsp;__(OverloadedList only)__
+    - Plots the histogram of the frequency distribution of the elements in the OverloadedList.
+    - Arguments: `self`, `bins: int | default: 10`, `title: str | default: 'Histogram'`, `x_label: str | default: 'Values --->'`, `y_label: str | default: 'Frequencies --->'`, `save_dir: str | default: None`, `file_name: str | default: None`, `histtype: str | default: 'step'`, `align: str | default: 'mid'`, `orientation: str | default: 'vertical'`, `log_scale: bool | default: False`, `show: bool | default: False`
+    - Process:
+        - Shows the generated figure if `show` is set to `True`
+        - Saves the generated figure if `save_dir` is provided.
+    - Returns: `bool`
+    - Example:
+
+        ```python
+            fig_check:float = obj.hist(show=True, save_dir='figures', file_name='some-figure')
+        ```
+
+9. `<class>.plot()`&nbsp;&nbsp;&nbsp;&nbsp;__(OverloadedList only)__
+    - Plots the lineplot of the frequency distribution of the elements in the OverloadedList.
+    - Arguments: `self`, `title: str | default: 'Line Plot'`, `x_label: str | default: 'Values --->'`, `y_label: str | default: 'Frequencies --->'`, `save_dir: str | default: None`, `file_name: str | default: None`, `color: str | default: '#000000'`, `linewidth: float | default: 1`, `marker: str | default: ','`,  `markerfacecolor: str | default: '#252525'`, `marker_size: float | default: 1.0`, `show: bool | default: False`
+    - Process:
+        - Shows the generated figure if `show` is set to `True`
+        - Saves the generated figure if `save_dir` is provided.
+    - Returns: `bool`
+    - Example:
+
+        ```python
+            fig_check:float = obj.plot(show=True, save_dir='figures', file_name='some-figure')
+        ```
+
+10. `<class>.scatter()`&nbsp;&nbsp;&nbsp;&nbsp;__(OverloadedList only)__
+    - Plots the scatterplot of the frequency distribution of the elements in the OverloadedList.
+    - Arguments: `self`, `title: str | default: 'Scatter Plot'`, `x_label: str | default: 'Values --->'`, `y_label: str | default: 'Frequencies --->'`, `save_dir: str | default: None`, `file_name: str | default: None`, `size: List[float] | default: [1.25]`, `color: str | default: '#000000'`, `marker: str | default: ','`, `line_width: float | default: 2`, `show: bool | default: False`
+    - Process:
+        - Shows the generated figure if `show` is set to `True`
+        - Saves the generated figure if `save_dir` is provided.
+    - Returns: `bool`
+    - Example:
+
+        ```python
+            fig_check:float = obj.scatter(show=True, save_dir='figures', file_name='some-figure')
+        ```
+
+11. `<class>.len (property)`
     - Finds and returns the length of the current iterable class object as a property.
     - Arguments: `self`
     - Returns: `int`
@@ -112,7 +171,7 @@ obj = OverloadedList(*args)
             _l: int = obj.len
         ```
 
-7. `<class>.frequencies (property)`&nbsp;&nbsp;&nbsp;&nbsp;__(OverloadedList only)__
+12. `<class>.frequencies (property)`&nbsp;&nbsp;&nbsp;&nbsp;__(OverloadedList only)__
     - Finds the frequencies of all elements of the given `OverloadedList` class and returns a list of unique values with their discovered frequencies.
     - Arguments: `self`
     - Returns: `OverloadedList, OverloadedList`

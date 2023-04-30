@@ -96,48 +96,19 @@ class OverloadedList(list):
         else:
             return float()
 
-    def draw(self, fig_type: str = 'hist', **kwargs):
-        """
-        Draw the frequency distribution graph of the values in the OverloadedList object.
-
-        args:
-            fig_type:str = 'hist' | 'plot' | 'scatter'
-            kwargs: dict = self.hist.kwargs | self.plot.kwargs | self.scatter.kwargs
-        """
-        method_exception = Exception(
-            message="Could not generate/save graph.",
-            code="graph_generation_error"
-        )
-        if fig_type.lower().strip() == 'hist':
-            res = self.hist(**kwargs)
-        elif fig_type.lower().strip() == 'plot':
-            res = self.plot(**kwargs)
-        elif fig_type.lower().strip() == 'scatter':
-            res = self.scatter(**kwargs)
-
-        else:
-            raise Exception(
-                message=f"Unsupported argument 'fig_type': {fig_type}",
-                code='unknown_fig_type'
-            )
-
-        if not res:
-            raise method_exception
-
-        return True
-
     def hist(
         self,
         bins: int = 10,
-        title: str = 'Figure 1',
-        x_label: str = 'X-axis --->',
-        y_label: str = 'Y-axis --->',
+        title: str = 'Histogram',
+        x_label: str = 'Values --->',
+        y_label: str = 'Frequencies --->',
         save_dir: str = None,
         file_name: str = None,
         histtype: str = 'step',
         align: str = 'mid',
         orientation: str = 'vertical',
         log_scale: bool = False,
+        show: bool = False,
         *args,
         **kwargs
     ) -> bool:
@@ -157,7 +128,8 @@ class OverloadedList(list):
             plt.title(title)
             plt.xlabel(x_label)
             plt.ylabel(y_label)
-            plt.show()
+            if show:
+                plt.show()
 
             if save_dir:
                 file_name = f"{file_name.lower().strip()}.PNG" if file_name else f"{title.lower().strip()}__hist__{datetime.utcnow()}.PNG"
@@ -171,16 +143,17 @@ class OverloadedList(list):
 
     def plot(
             self,
-            title: str = 'Figure 1',
-            x_label: str = 'X-axis --->',
-            y_label: str = 'Y-axis --->',
+            title: str = 'Line Plot',
+            x_label: str = 'Values --->',
+            y_label: str = 'Frequencies --->',
             save_dir: str = None,
             file_name: str = None,
-            color: str = '#ffffff',
+            color: str = '#000000',
             linewidth: float = 1,
             marker: str = ',',
             markerfacecolor: str = '#252525',
             marker_size: float = 1.0,
+            show: bool = False,
             *args,
             **kwargs
     ):
@@ -196,7 +169,8 @@ class OverloadedList(list):
             plt.title(title)
             plt.xlabel(x_label)
             plt.ylabel(y_label)
-            plt.show()
+            if show:
+                plt.show()
 
             if save_dir:
                 file_name = f"{file_name.lower().strip()}.PNG" if file_name else f"{title.lower().strip()}__hist__{datetime.utcnow()}.PNG"
@@ -210,15 +184,18 @@ class OverloadedList(list):
 
     def scatter(
             self,
-            title: str = 'Figure 1',
-            x_label: str = 'X-axis --->',
-            y_label: str = 'Y-axis --->',
+            title: str = 'Scatter Plot',
+            x_label: str = 'Values --->',
+            y_label: str = 'Frequencies --->',
             save_dir: str = None,
             file_name: str = None,
             size: List[float] = [1.25],
-            color: str = '#ffffff',
+            color: str = '#000000',
             marker: str = ',',
-            line_width: float = 0.25
+            line_width: float = 2,
+            show: bool = False,
+            *args,
+            **kwargs
     ):
         """
         Draws and saves if required, the scatter-plot of the frequency distribution of the elements of the OverloadedList object.
@@ -227,13 +204,13 @@ class OverloadedList(list):
             x_axis, y_axis = self.frequencies
             x_axis = array(x_axis)
             y_axis = array(y_axis)
-            plt.scatter(x=x_axis, y=y_axis, s=array(size),
-                        color=color, marker=marker, linewidths=line_width)
+            plt.scatter(x=x_axis, y=y_axis, s=array(size), color=color, marker=marker, linewidths=line_width)
             plt.title(title)
             plt.xlabel(x_label)
             plt.ylabel(y_label)
-            plt.show()
-            
+            if show:
+                plt.show()
+
             if save_dir:
                 file_name = f"{file_name.lower().strip()}.PNG" if file_name else f"{title.lower().strip()}__hist__{datetime.utcnow()}.PNG"
                 save_path = path.join(
