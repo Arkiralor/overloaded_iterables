@@ -73,8 +73,14 @@ class TestOverloadedSet(unittest.TestCase):
     VALID_NUMBERS = OverloadedList([num for num in range(0, 1_000_000)])
 
     def setUp(self):
-        self.ARR_1 = OverloadedSet({1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
-                                   14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30})
+        self.ARR_1 = OverloadedSet()
+
+        _num = choice(self.VALID_NUMBERS)
+        while self.ARR_1.len < 100:
+            if _num not in self.ARR_1:
+                self.ARR_1.add(_num)
+            _num = choice(self.VALID_NUMBERS)
+
         self.ARR_2 = self.ARR_1
         _num = choice(self.VALID_NUMBERS)
         while _num in self.ARR_2:
@@ -83,7 +89,7 @@ class TestOverloadedSet(unittest.TestCase):
         self.ARR_2.add(_num)
 
     def test_sorting(self):
-        self.assertSequenceEqual(OverloadedSet(sorted(self.ARR_1)), self.ARR_1.sort())
+        self.assertSequenceEqual(sorted(self.ARR_1), self.ARR_1.sort())
 
     def test_raise_to_power(self):
         power = choice([i for i in np.arange(0.5, 5.0, 0.5)])
