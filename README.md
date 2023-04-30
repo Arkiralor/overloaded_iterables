@@ -66,7 +66,7 @@ obj = OverloadedList(*args)
             from secrets import choice
 
             ## Taking the power variable, 'z' to be a random integer between -10 and +10
-            z:float = choice([i for i in nparange(-10, 10, 0.5)])
+            z:float = choice([i for i in np.arange(-10, 10, 0.5)])
             _raised_sequence: type(obj) = obj.raise_to(power=z)
         ```
 
