@@ -4,7 +4,7 @@ from statistics import mean, median
 
 import numpy as np
 
-from overloaded_iterables.classes import OverloadedList, OverloadedSet
+from src.overloaded_iterables.classes import OverloadedList, OverloadedSet
 
 
 class TestOverloadedList(unittest.TestCase):
