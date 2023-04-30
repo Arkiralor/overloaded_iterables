@@ -3,8 +3,9 @@ from setuptools import setup, find_packages
 
 setup(
     name='overloaded-iterables',
-    version='0.5.1',
-    description="Overloaded version of the built-in python classes: <list> and <set> to include some extra functionalities.",
+    version='0.5.46',
+    description="Overloaded version of the built-in python classes: list and set to include some extra functionalities.",
+    long_description="Overloaded version of the built-in python classes: list and set to include some extra functionalities such as sort(), rms(), etc",
     license='MIT',
     author="Prithoo Medhi",
     author_email='prithoo11335@gmail.com',
@@ -23,3 +24,6 @@ setup(
     ],
     install_requires=[],
 )
+
+if __name__=="__main__":
+    pass

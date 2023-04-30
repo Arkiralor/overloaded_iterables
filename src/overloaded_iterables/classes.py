@@ -64,7 +64,7 @@ class OverloadedSet(set):
         return sum(self)/len(self)
 
     def sort(self, reverse: bool = False):
-        return self._type(sorted(self, reverse=reverse))
+        return sorted(self, reverse=reverse)
 
     def raise_to(self, power: float = 1):
         return self._type([item**power for item in self])
