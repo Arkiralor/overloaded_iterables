@@ -6,8 +6,20 @@ The current iteration contains the following classes
 
 ## Specifications
 
-1. Python Version: Python v3.8+
-2. Code Coverage: 93%
+1. __Python Version:__ Python v3.8+
+2. __Code Coverage:__ ![_code coverage_](media\screenshots\coverage.PNG)
+3. __Tests Status:__ ![_test status_](media\screenshots\test_results.PNG)
+
+## Python Package Index
+
+1. [Project Homepage](https://pypi.org/project/overloaded-iterables/)
+2. [Contents](https://pypi.org/project/overloaded-iterables/#files)
+
+## Installation
+
+```sh
+python -m pip install overloaded-iterables
+```
 
 ## Classes
 

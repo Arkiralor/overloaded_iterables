@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='overloaded-iterables',
-    version='0.5.46',
+    version='0.5.47',
     description="Overloaded version of the built-in python classes: list and set to include some extra functionalities.",
     long_description="Overloaded version of the built-in python classes: list and set to include some extra functionalities such as sort(), rms(), etc",
     license='MIT',
@@ -23,8 +23,13 @@ setup(
         'sort'
     ],
     install_requires=[
-        "numpy"
+
     ],
+    platforms=[
+        "windows",
+        "ubuntu-linux",
+        "mac-os"
+    ]
 )
 
 if __name__=="__main__":
