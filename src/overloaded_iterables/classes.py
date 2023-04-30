@@ -1,3 +1,10 @@
+from datetime import datetime
+from os import path
+from typing import List
+
+import matplotlib.pyplot as plt
+from numpy import ndarray, array
+
 
 class OverloadedList(list):
     """
@@ -88,6 +95,145 @@ class OverloadedList(list):
             return _sorted[(_l)//2]
         else:
             return float()
+
+    def draw(self, fig_type: str = 'hist', **kwargs):
+        """
+        Draw the frequency distribution graph of the values in the OverloadedList object.
+
+        args:
+            fig_type:str = 'hist' | 'plot' | 'scatter'
+            kwargs: dict = self.hist.kwargs | self.plot.kwargs | self.scatter.kwargs
+        """
+        method_exception = Exception(
+            message="Could not generate/save graph.",
+            code="graph_generation_error"
+        )
+        if fig_type.lower().strip() == 'hist':
+            res = self.hist(**kwargs)
+        elif fig_type.lower().strip() == 'plot':
+            res = self.plot(**kwargs)
+        elif fig_type.lower().strip() == 'scatter':
+            res = self.scatter(**kwargs)
+
+        else:
+            raise Exception(
+                message=f"Unsupported argument 'fig_type': {fig_type}",
+                code='unknown_fig_type'
+            )
+
+        if not res:
+            raise method_exception
+
+        return True
+
+    def hist(
+        self,
+        bins: int = 10,
+        title: str = 'Figure 1',
+        x_label: str = 'X-axis --->',
+        y_label: str = 'Y-axis --->',
+        save_dir: str = None,
+        histtype: str = 'step',
+        align: str = 'mid',
+        orientation: str = 'vertical',
+        log_scale: bool = False,
+        *args,
+        **kwargs
+    ) -> bool:
+        """
+        Draws and saves if required, the histogram of the frequency distribution of the elements of the OverloadedList object.
+        """
+        try:
+            x_axis = array(self)
+            plt.hist(
+                x=x_axis,
+                bins=bins,
+                histtype=histtype,
+                align=align,
+                orientation=orientation,
+                log=log_scale
+            )
+            plt.title(title)
+            plt.xlabel(x_label)
+            plt.ylabel(y_label)
+            plt.show()
+            if save_dir:
+                save_path = path.join(
+                    save_dir, f"{title.lower().strip()}__hist__{datetime.utcnow()}")
+                plt.savefig(save_path)
+
+            return True
+        except Exception as ex:
+            raise ex
+
+    def plot(
+            self,
+            title: str = 'Figure 1',
+            x_label: str = 'X-axis --->',
+            y_label: str = 'Y-axis --->',
+            save_dir: str = None,
+            color: str = '#ffffff',
+            linewidth: float = 1,
+            marker: str = ',',
+            markerfacecolor: str = '#252525',
+            marker_size: float = 1.0,
+            *args,
+            **kwargs
+    ):
+        """
+        Draws and saves if required, the line-plot of the frequency distribution of the elements of the OverloadedList object.
+        """
+        try:
+            x_axis, y_axis = self.frequencies
+            x_axis = array(x_axis)
+            y_axis = array(y_axis)
+            plt.plot(x_axis, y_axis, color=color, linewidth=linewidth, marker=marker,
+                     markerfacecolor=markerfacecolor, markersize=marker_size)
+            plt.title(title)
+            plt.xlabel(x_label)
+            plt.ylabel(y_label)
+            plt.show()
+            if save_dir:
+                save_path = path.join(
+                    save_dir, f"{title.lower().strip()}__plot__{datetime.utcnow()}")
+                plt.savefig(save_path)
+
+            return True
+        except Exception as ex:
+            raise ex
+
+    def scatter(
+            self,
+            title: str = 'Figure 1',
+            x_label: str = 'X-axis --->',
+            y_label: str = 'Y-axis --->',
+            save_dir: str = None,
+            size: List[float] = [1.25],
+            color: str = '#ffffff',
+            marker: str = ',',
+            line_width: float = 0.25
+    ):
+        """
+        Draws and saves if required, the scatter-plot of the frequency distribution of the elements of the OverloadedList object.
+        """
+        try:
+            x_axis, y_axis = self.frequencies
+            x_axis = array(x_axis)
+            y_axis = array(y_axis)
+            plt.scatter(x=x_axis, y=y_axis, s=array(size),
+                        color=color, marker=marker, linewidths=line_width)
+            plt.title(title)
+            plt.xlabel(x_label)
+            plt.ylabel(y_label)
+            plt.show()
+            if save_dir:
+                save_path = path.join(
+                    save_dir, f"{title.lower().strip()}__scatter__{datetime.utcnow()}")
+                plt.savefig(save_path)
+
+            return True
+        except Exception as ex:
+            raise ex
 
     @property
     def _type(self):

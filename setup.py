@@ -23,7 +23,8 @@ setup(
         'sort'
     ],
     install_requires=[
-
+        "matplotlib",
+        "numpy"
     ],
     platforms=[
         "windows",
