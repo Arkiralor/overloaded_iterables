@@ -2,13 +2,21 @@ from os import path
 from setuptools import setup, find_packages
 
 def read(fname:str='README.md'):
-    return open(path.join(path.dirname(__file__), fname)).read()
+    file_path = path.join(path.dirname(__file__), fname)
+    with open(
+        file=file_path, 
+        mode="rt", 
+        encoding="utf-8"
+    )as file_obj:
+        data = file_obj.read()
+    return data
 
 setup(
     name='overloaded-iterables',
     version='0.6',
     description="Overloaded version of the built-in python classes: list and set to include some extra functionalities.",
-    long_description=read(),
+    long_description=read('README.md'),
+    long_description_content_type='text/markdown',
     license='MIT',
     author="Prithoo Medhi",
     author_email='prithoo11335@gmail.com',
