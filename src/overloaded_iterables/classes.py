@@ -153,6 +153,7 @@ class OverloadedList(list):
             plt.clf()
             return True
         except Exception as ex:
+            plt.clf()
             raise ex
 
     def plot(
@@ -205,6 +206,7 @@ class OverloadedList(list):
             plt.clf()
             return True
         except Exception as ex:
+            plt.clf()
             raise ex
 
     def scatter(
@@ -253,9 +255,9 @@ class OverloadedList(list):
                 raise ValueError("Something went wrong.")
             
             plt.clf()
-
             return True
         except Exception as ex:
+            plt.clf()
             raise ex
 
     @property
