@@ -103,12 +103,15 @@ class OverloadedList(list):
         x_label: str = 'Values --->',
         y_label: str = 'Frequencies --->',
         save_dir: str = None,
+        color: str = '#0f0f0f',
         file_name: str = None,
         histtype: str = 'step',
         align: str = 'mid',
         orientation: str = 'vertical',
         log_scale: bool = False,
         show: bool = False,
+        dpi: int=300,
+        pad_inches: float=1,
         *args,
         **kwargs
     ) -> bool:
@@ -123,20 +126,25 @@ class OverloadedList(list):
                 histtype=histtype,
                 align=align,
                 orientation=orientation,
-                log=log_scale
+                log=log_scale,
+                color=color
             )
             plt.title(title)
             plt.xlabel(x_label)
             plt.ylabel(y_label)
-            if show:
-                plt.show()
 
-            if save_dir:
-                file_name = f"{file_name.lower().strip()}.PNG" if file_name else f"{title.lower().strip()}__hist__{datetime.utcnow()}.PNG"
+            if save_dir and not show:
+                file_name = f"{file_name.lower().strip()}.PNG" if file_name else f"{title.lower().strip()}__hist__{datetime.utcnow().timestamp()}.PNG"
                 save_path = path.join(
                     save_dir, file_name)
-                plt.savefig(save_path)
-
+                plt.savefig(fname=save_path, dpi=dpi, pad_inches=pad_inches)
+            elif show and not save_dir:
+                plt.show()
+            elif save_dir and show:
+                raise AttributeError(
+                    "Both `show` and `save_dir` cannot be defined."
+                )
+            
             return True
         except Exception as ex:
             raise ex
@@ -154,6 +162,8 @@ class OverloadedList(list):
             markerfacecolor: str = '#252525',
             marker_size: float = 1.0,
             show: bool = False,
+            dpi: int=300,
+            pad_inches: float=1,
             *args,
             **kwargs
     ):
@@ -169,14 +179,17 @@ class OverloadedList(list):
             plt.title(title)
             plt.xlabel(x_label)
             plt.ylabel(y_label)
-            if show:
-                plt.show()
-
-            if save_dir:
-                file_name = f"{file_name.lower().strip()}.PNG" if file_name else f"{title.lower().strip()}__hist__{datetime.utcnow()}.PNG"
+            if save_dir and not show:
+                file_name = f"{file_name.lower().strip()}.PNG" if file_name else f"{title.lower().strip()}__hist__{datetime.utcnow().timestamp()}.PNG"
                 save_path = path.join(
                     save_dir, file_name)
-                plt.savefig(save_path)
+                plt.savefig(fname=save_path, dpi=dpi, pad_inches=pad_inches)
+            elif show and not save_dir:
+                plt.show()
+            elif save_dir and show:
+                raise AttributeError(
+                    "Both `show` and `save_dir` cannot be defined."
+                )
 
             return True
         except Exception as ex:
@@ -194,6 +207,8 @@ class OverloadedList(list):
             marker: str = ',',
             line_width: float = 2,
             show: bool = False,
+            dpi: int=300,
+            pad_inches: float=1,
             *args,
             **kwargs
     ):
@@ -208,14 +223,17 @@ class OverloadedList(list):
             plt.title(title)
             plt.xlabel(x_label)
             plt.ylabel(y_label)
-            if show:
-                plt.show()
-
-            if save_dir:
-                file_name = f"{file_name.lower().strip()}.PNG" if file_name else f"{title.lower().strip()}__hist__{datetime.utcnow()}.PNG"
+            if save_dir and not show:
+                file_name = f"{file_name.lower().strip()}.PNG" if file_name else f"{title.lower().strip()}__hist__{datetime.utcnow().timestamp()}.PNG"
                 save_path = path.join(
                     save_dir, file_name)
-                plt.savefig(save_path)
+                plt.savefig(fname=save_path, dpi=dpi, pad_inches=pad_inches)
+            elif show and not save_dir:
+                plt.show()
+            elif save_dir and show:
+                raise AttributeError(
+                    "Both `show` and `save_dir` cannot be defined."
+                )
 
             return True
         except Exception as ex:
