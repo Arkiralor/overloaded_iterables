@@ -1,3 +1,4 @@
+from math import prod
 import unittest
 from secrets import choice
 from statistics import mean, median
@@ -22,8 +23,34 @@ class TestOverloadedList(unittest.TestCase):
 
         self.VALUES, self.FREQUENCIES = self.ARR_1.frequencies
 
+    def test_sum(self):
+        self.assertEqual(sum(self.ARR_1), self.ARR_1.sum())
+    
+    def test_sum_null_list(self):
+        arr = OverloadedList()
+        self.assertEqual(float(), arr.sum())
+
+    def test_prod(self):
+        # prithoo: We need smaller values to test prod() so that we may avoid memory overflow errors.
+        prod_contents = [item for item in np.arange(0, 25, 0.01)]
+        prod_arr = OverloadedList([choice(prod_contents)
+                                  for _ in range(1, 16)])
+
+        self.assertEqual(prod(prod_arr), prod_arr.prod())
+
+    def test_prod_null_list(self):
+        arr = OverloadedList()
+        self.assertEqual(float(), arr.prod())
+
+    def test_prod_zero_in_list(self):
+        arr = self.ARR_1
+        arr.append(0)
+
+        self.assertEqual(float(), arr.prod())
+
     def test_sorting(self):
-        self.assertSequenceEqual(OverloadedList(sorted(self.ARR_1)), self.ARR_1.sort())
+        self.assertSequenceEqual(OverloadedList(
+            sorted(self.ARR_1)), self.ARR_1.sort())
 
     def test_raise_to_power(self):
         power = choice([i for i in np.arange(0.5, 5.0, 0.5)])
@@ -87,6 +114,46 @@ class TestOverloadedSet(unittest.TestCase):
             _num = choice(self.VALID_NUMBERS)
 
         self.ARR_2.add(_num)
+
+    def test_sum(self):
+        self.assertEqual(sum(self.ARR_1), self.ARR_1.sum())
+
+    def test_sum_null_list(self):
+        arr = OverloadedList()
+        self.assertEqual(float(), arr.sum())
+
+    def test_prod(self):
+        # prithoo: We need smaller values to test prod() so that we may avoid memory overflow errors.
+        prod_contents = [item for item in np.arange(0, 25, 0.01)]
+        prod_arr = OverloadedSet()
+
+        _num = choice(prod_contents)
+        while prod_arr.len < 16:
+            # Of course, we cannot have duplicate elements in a set.
+            if not _num in prod_arr:
+                prod_arr.add(_num)
+            _num = choice(prod_contents)
+
+        self.assertEqual(prod(prod_arr), prod_arr.prod())
+
+    def test_prod_null_list(self):
+        arr = OverloadedList()
+        self.assertEqual(float(), arr.prod())
+
+    def test_prod_zero_in_list(self):
+        # prithoo: We need smaller values to test prod() so that we may avoid memory overflow errors.
+        prod_contents = [item for item in np.arange(0, 25, 0.01)]
+        prod_arr = OverloadedSet()
+
+        _num = choice(prod_contents)
+        while prod_arr.len < 16:
+            # Of course, we cannot have duplicate elements in a set.
+            if not _num in prod_arr:
+                prod_arr.add(_num)
+            _num = choice(prod_contents)
+        if 0.0 not in prod_arr:
+            prod_arr.add(0.0)
+        self.assertEqual(float(), prod_arr.prod())
 
     def test_sorting(self):
         self.assertSequenceEqual(sorted(self.ARR_1), self.ARR_1.sort())
