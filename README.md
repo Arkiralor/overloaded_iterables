@@ -7,7 +7,7 @@ The current iteration contains the following classes
 ## Specifications
 
 1. Python Version: Python v3.8+
-2. Code Coverage: 91%
+2. Code Coverage: 93%
 
 ## Classes
 
