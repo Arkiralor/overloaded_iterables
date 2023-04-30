@@ -138,13 +138,19 @@ class OverloadedList(list):
                 save_path = path.join(
                     save_dir, file_name)
                 plt.savefig(fname=save_path, dpi=dpi, pad_inches=pad_inches)
+                return file_name
             elif show and not save_dir:
                 plt.show()
             elif save_dir and show:
                 raise AttributeError(
                     "Both `show` and `save_dir` cannot be defined."
                 )
+            elif not show and not save_dir:
+                pass
+            else:
+                raise ValueError("Something went wrong.")
             
+            plt.clf()
             return True
         except Exception as ex:
             raise ex
@@ -184,13 +190,19 @@ class OverloadedList(list):
                 save_path = path.join(
                     save_dir, file_name)
                 plt.savefig(fname=save_path, dpi=dpi, pad_inches=pad_inches)
+                return file_name
             elif show and not save_dir:
                 plt.show()
             elif save_dir and show:
                 raise AttributeError(
                     "Both `show` and `save_dir` cannot be defined."
                 )
+            elif not show and not save_dir:
+                pass
+            else:
+                raise ValueError("Something went wrong.")
 
+            plt.clf()
             return True
         except Exception as ex:
             raise ex
@@ -228,12 +240,19 @@ class OverloadedList(list):
                 save_path = path.join(
                     save_dir, file_name)
                 plt.savefig(fname=save_path, dpi=dpi, pad_inches=pad_inches)
+                return file_name
             elif show and not save_dir:
                 plt.show()
             elif save_dir and show:
                 raise AttributeError(
                     "Both `show` and `save_dir` cannot be defined."
                 )
+            elif not show and not save_dir:
+                pass
+            else:
+                raise ValueError("Something went wrong.")
+            
+            plt.clf()
 
             return True
         except Exception as ex:

@@ -1,4 +1,6 @@
 from math import prod
+from os import path, makedirs
+from pathlib import Path
 import unittest
 from secrets import choice
 from statistics import mean, median
@@ -13,15 +15,20 @@ class TestOverloadedList(unittest.TestCase):
     Test-cases for the `OverloadedList` class.
     """
 
-    VALID_NUMBERS = OverloadedList([num for num in range(0, 1_000_000)])
-
     def setUp(self):
+        self.VALID_NUMBERS = OverloadedList([num for num in range(0, 101)])
+
         self.ARR_1 = OverloadedList(
-            [choice(self.VALID_NUMBERS) for _ in range(1, 101)])
+            [choice(self.VALID_NUMBERS) for _ in range(1, 10_001)])
         self.ARR_2 = self.ARR_1
         self.ARR_2.append(choice(self.VALID_NUMBERS))
 
         self.VALUES, self.FREQUENCIES = self.ARR_1.frequencies
+        
+        self.BASE_DIR = Path(__file__).resolve().parent.parent
+        self.GRAPH_DIR = path.join(self.BASE_DIR, "media", "graphs")
+        if not path.exists(self.GRAPH_DIR):
+            makedirs(self.GRAPH_DIR)
 
     def test_sum(self):
         self.assertEqual(sum(self.ARR_1), self.ARR_1.sum())
@@ -100,6 +107,18 @@ class TestOverloadedList(unittest.TestCase):
 
     def test_scatter(self):
         self.assertTrue(self.ARR_1.scatter())
+
+    def test_hist_file(self):
+        name = self.ARR_1.hist(bins=self.ARR_1.len, save_dir=self.GRAPH_DIR, name='hist', histtype='step', title='random_hist', file_name='random_hist')
+        self.assertTrue(path.exists(path.join(self.GRAPH_DIR, name)))
+
+    def test_plot_file(self):
+        name = self.ARR_1.plot(save_dir=self.GRAPH_DIR, name='plot', title='random_plot', file_name='random_plot')
+        self.assertTrue(path.exists(path.join(self.GRAPH_DIR, name)))
+
+    def test_scatter_file(self):
+        name = self.ARR_1.scatter(save_dir=self.GRAPH_DIR, name='scatter', title='random_scatter', file_name='random_scatter')
+        self.assertTrue(path.exists(path.join(self.GRAPH_DIR, name)))
 
 
 class TestOverloadedSet(unittest.TestCase):
