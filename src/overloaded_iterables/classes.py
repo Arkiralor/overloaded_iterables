@@ -133,6 +133,7 @@ class OverloadedList(list):
         x_label: str = 'X-axis --->',
         y_label: str = 'Y-axis --->',
         save_dir: str = None,
+        file_name: str = None,
         histtype: str = 'step',
         align: str = 'mid',
         orientation: str = 'vertical',
@@ -157,9 +158,11 @@ class OverloadedList(list):
             plt.xlabel(x_label)
             plt.ylabel(y_label)
             plt.show()
+
             if save_dir:
+                file_name = f"{file_name.lower().strip()}.PNG" if file_name else f"{title.lower().strip()}__hist__{datetime.utcnow()}.PNG"
                 save_path = path.join(
-                    save_dir, f"{title.lower().strip()}__hist__{datetime.utcnow()}")
+                    save_dir, file_name)
                 plt.savefig(save_path)
 
             return True
@@ -172,6 +175,7 @@ class OverloadedList(list):
             x_label: str = 'X-axis --->',
             y_label: str = 'Y-axis --->',
             save_dir: str = None,
+            file_name: str = None,
             color: str = '#ffffff',
             linewidth: float = 1,
             marker: str = ',',
@@ -193,9 +197,11 @@ class OverloadedList(list):
             plt.xlabel(x_label)
             plt.ylabel(y_label)
             plt.show()
+
             if save_dir:
+                file_name = f"{file_name.lower().strip()}.PNG" if file_name else f"{title.lower().strip()}__hist__{datetime.utcnow()}.PNG"
                 save_path = path.join(
-                    save_dir, f"{title.lower().strip()}__plot__{datetime.utcnow()}")
+                    save_dir, file_name)
                 plt.savefig(save_path)
 
             return True
@@ -208,6 +214,7 @@ class OverloadedList(list):
             x_label: str = 'X-axis --->',
             y_label: str = 'Y-axis --->',
             save_dir: str = None,
+            file_name: str = None,
             size: List[float] = [1.25],
             color: str = '#ffffff',
             marker: str = ',',
@@ -226,9 +233,11 @@ class OverloadedList(list):
             plt.xlabel(x_label)
             plt.ylabel(y_label)
             plt.show()
+            
             if save_dir:
+                file_name = f"{file_name.lower().strip()}.PNG" if file_name else f"{title.lower().strip()}__hist__{datetime.utcnow()}.PNG"
                 save_path = path.join(
-                    save_dir, f"{title.lower().strip()}__scatter__{datetime.utcnow()}")
+                    save_dir, file_name)
                 plt.savefig(save_path)
 
             return True
