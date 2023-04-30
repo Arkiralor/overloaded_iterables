@@ -11,25 +11,27 @@ The current iteration contains the following classes
 
 ## Classes
 
-1. `OverloadedList`
-    - A non-datatype constrained, single-dimensional collection of values.
-    - Inherits solely from Python's built-in `<list>` class.
+### 1. OverloadedList
 
-    ```python
-    from overloaded_iterables.classes import OverloadedList
+- A non-datatype constrained, single-dimensional collection of values.
+- Inherits solely from Python's built-in `<list>` class.
 
-    obj = OverloadedList(*args)
-    ```
+```python
+from overloaded_iterables.classes import OverloadedList
 
-2. `OverloadedSet`
-    - A non-datatype constrained, single-dimensional collection of __unique__ values.
-    - Inherits solely from Python's built-in `<set>` class.
+obj = OverloadedList(*args)
+```
 
-    ```python
+### 2. OverloadedSet
+
+- A non-datatype constrained, single-dimensional collection of __unique__ values.
+- Inherits solely from Python's built-in `<set>` class.
+
+```python
     from overloaded_iterables.classes import OverloadedSet
 
     obj = OverloadedSet(*args)
-    ```
+```
 
 ## Functions and Methods
 
@@ -40,7 +42,7 @@ The current iteration contains the following classes
     - Example:
 
         ```python
-            _mean = obj.mean()
+            _mean: float = obj.mean()
         ```
 
 2. `<class>.sort()`
@@ -50,7 +52,7 @@ The current iteration contains the following classes
     - Example:
 
         ```python
-            _mean = obj.sort()
+            sorted_seq: list = obj.sort()
         ```
 
 3. `<class>.raise_to()`
@@ -65,22 +67,45 @@ The current iteration contains the following classes
 
             ## Taking the power variable, 'z' to be a random integer between -10 and +10
             z:float = choice([i for i in nparange(-10, 10, 0.5)])
-            _raised_sequence = obj.raise_to(power=z)
+            _raised_sequence: type(obj) = obj.raise_to(power=z)
         ```
 
 4. `<class>.rms()`
     - Finds the [Root-Mean-Square (RMS)](https://en.wikipedia.org/wiki/Root_mean_square) of the values in the current iterable class object.
     - Arguments: `self`
     - Returns: `float (64-bit)`
+    - Example:
+
+        ```python
+            _rms: float = obj.rms()
+        ```
+
 5. `<class>.median()`
     - Finds the [median](https://en.wikipedia.org/wiki/Median) of the contents of the given iterable class object.
     - Arguments: `self`
     - Returns: `float (64-bit)`
+    - Example:
+
+        ```python
+            _median:float = obj.median()
+        ```
+
 6. `<class>.len (property)`
     - Finds and returns the length of the current iterable class object as a property.
     - Arguments: `self`
     - Returns: `int`
+    - Example:
+
+        ```python
+            _l: int = obj.len
+        ```
+
 7. `<class>.frequencies (property)`&nbsp;&nbsp;&nbsp;&nbsp;__(OverloadedList only)__
     - Finds the frequencies of all elements of the given `OverloadedList` class and returns a list of unique values with their discovered frequencies.
     - Arguments: `self`
     - Returns: `OverloadedList, OverloadedList`
+    - Example:
+
+        ```python
+            values: Overloadedlist, frequencies: OverloadedList = obj.frequencies
+        ```
