@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='overloaded-iterables',
-    version='0.5.4',
+    version='0.5.46',
     description="Overloaded version of the built-in python classes: list and set to include some extra functionalities.",
     long_description="Overloaded version of the built-in python classes: list and set to include some extra functionalities such as sort(), rms(), etc",
     license='MIT',
