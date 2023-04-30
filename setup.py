@@ -9,7 +9,7 @@ setup(
     author_email='prithoo11335@gmail.com',
     packages=find_packages('src'),
     package_dir={'': 'src'},
-    url='https://github.com/Arkiralor/PythonSnippets/tree/master/overloaded_iterables',
+    url='https://github.com/Arkiralor/overloaded_iterables',
     keywords= [
         'python',
         'sequence',
