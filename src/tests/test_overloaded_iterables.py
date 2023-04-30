@@ -22,6 +22,9 @@ class TestOverloadedList(unittest.TestCase):
 
         self.VALUES, self.FREQUENCIES = self.ARR_1.frequencies
 
+    def test_sorting(self):
+        self.assertSequenceEqual(OverloadedList(sorted(self.ARR_1)), self.ARR_1.sort())
+
     def test_raise_to_power(self):
         power = choice([i for i in np.arange(0.5, 5.0, 0.5)])
         raised = OverloadedList([item**power for item in self.ARR_1])
@@ -78,6 +81,9 @@ class TestOverloadedSet(unittest.TestCase):
             _num = choice(self.VALID_NUMBERS)
 
         self.ARR_2.add(_num)
+
+    def test_sorting(self):
+        self.assertSequenceEqual(OverloadedSet(sorted(self.ARR_1)), self.ARR_1.sort())
 
     def test_raise_to_power(self):
         power = choice([i for i in np.arange(0.5, 5.0, 0.5)])
