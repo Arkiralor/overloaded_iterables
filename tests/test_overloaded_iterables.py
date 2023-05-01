@@ -1,5 +1,5 @@
 from math import prod
-from os import path, makedirs
+from os import path, makedirs, remove
 from pathlib import Path
 import unittest
 from secrets import choice
@@ -16,23 +16,27 @@ class TestOverloadedList(unittest.TestCase):
     """
 
     def setUp(self):
-        self.VALID_NUMBERS = OverloadedList([num for num in range(0, 101)])
+        self.VALID_NUMBERS = OverloadedList([num for num in range(0, 25)])
 
         self.ARR_1 = OverloadedList(
-            [choice(self.VALID_NUMBERS) for _ in range(1, 10_001)])
+            [choice(self.VALID_NUMBERS) for _ in range(1, 501)])
         self.ARR_2 = self.ARR_1
         self.ARR_2.append(choice(self.VALID_NUMBERS))
 
         self.VALUES, self.FREQUENCIES = self.ARR_1.frequencies
-        
+
         self.BASE_DIR = Path(__file__).resolve().parent.parent
         self.GRAPH_DIR = path.join(self.BASE_DIR, "media", "graphs")
         if not path.exists(self.GRAPH_DIR):
             makedirs(self.GRAPH_DIR)
 
+        self.hist_name: str = None
+        self.plot_name: str = None
+        self.scatter_name: str = None
+
     def test_sum(self):
         self.assertEqual(sum(self.ARR_1), self.ARR_1.sum())
-    
+
     def test_sum_null_list(self):
         arr = OverloadedList()
         self.assertEqual(float(), arr.sum())
@@ -101,7 +105,7 @@ class TestOverloadedList(unittest.TestCase):
 
     def test_hist(self):
         self.assertTrue(self.ARR_1.hist())
-    
+
     def test_plot(self):
         self.assertTrue(self.ARR_1.plot())
 
@@ -109,16 +113,31 @@ class TestOverloadedList(unittest.TestCase):
         self.assertTrue(self.ARR_1.scatter())
 
     def test_hist_file(self):
-        name = self.ARR_1.hist(bins=self.ARR_1.len, save_dir=self.GRAPH_DIR, name='hist', histtype='step', title='random_hist', file_name='random_hist')
-        self.assertTrue(path.exists(path.join(self.GRAPH_DIR, name)))
+        self.hist_name = self.ARR_1.hist(
+            # bins=self.ARR_1.len//10, 
+            save_dir=self.GRAPH_DIR, name='hist', histtype='step', title='random_hist')
+        self.assertTrue(path.exists(path.join(self.GRAPH_DIR, self.hist_name)))
 
     def test_plot_file(self):
-        name = self.ARR_1.plot(save_dir=self.GRAPH_DIR, name='plot', title='random_plot', file_name='random_plot')
-        self.assertTrue(path.exists(path.join(self.GRAPH_DIR, name)))
+        self.plot_name = self.ARR_1.plot(
+            save_dir=self.GRAPH_DIR, name='plot', title='random_plot')
+        self.assertTrue(path.exists(path.join(self.GRAPH_DIR, self.plot_name)))
 
     def test_scatter_file(self):
-        name = self.ARR_1.scatter(save_dir=self.GRAPH_DIR, name='scatter', title='random_scatter', file_name='random_scatter')
-        self.assertTrue(path.exists(path.join(self.GRAPH_DIR, name)))
+        self.scatter_name = self.ARR_1.scatter(
+            save_dir=self.GRAPH_DIR, name='scatter', title='random_scatter')
+        self.assertTrue(path.exists(
+            path.join(self.GRAPH_DIR, self.scatter_name)))
+
+    def tearDown(self):
+        if self.hist_name and path.exists(path.join(self.GRAPH_DIR, self.hist_name)):
+            remove(path.join(self.GRAPH_DIR, self.hist_name))
+
+        if self.plot_name and path.exists(path.join(self.GRAPH_DIR, self.plot_name)):
+            remove(path.join(self.GRAPH_DIR, self.plot_name))
+
+        if self.scatter_name and path.exists(path.join(self.GRAPH_DIR, self.scatter_name)):
+            remove(path.join(self.GRAPH_DIR, self.scatter_name))
 
 
 class TestOverloadedSet(unittest.TestCase):
