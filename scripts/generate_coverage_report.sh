@@ -1,1 +1,1 @@
-pytest --cov --cov-report=html:coverage
+pytest --cov --cov-report=html:coverage --cov-report=xml:coverage/coverage.xml --cov-report=term-missing --cov-config=.coveragerc
