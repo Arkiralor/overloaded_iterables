@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 _ = load_dotenv(dotenv_path='.env', verbose=True, override=True)
 
 
-def read(fname: str = 'README.md'):
+def read(fname: str = 'DESCRIPTION.md'):
     file_path = path.join(path.dirname(__file__), fname)
     with open(
         file=file_path,
@@ -33,7 +33,7 @@ setup(
     name=name,
     version=version,
     description=description,
-    long_description=read('README.md'),
+    long_description=read('DESCRIPTION.md'),
     long_description_content_type=long_description_content_type,
     license='MIT',
     author=author,

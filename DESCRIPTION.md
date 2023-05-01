@@ -1,13 +1,6 @@
 # Overloaded Iterables
 
-Overloaded versions of the built-in python classes: `<list>` and `<set>`, to include some extra functionalities as an experiment.
-
-An experimental Python package to extend the methods found in Python's built-in list and set classes to add some extra functionality that I, personally find useful in my day-to-day implementations and was too lazy to keep writing/copy-pasting again and again.
-
-## Python Package Index
-
-1. [Project Homepage](https://pypi.org/project/overloaded-iterables/)
-2. [Contents](https://pypi.org/project/overloaded-iterables/#files)
+Documentation on how to use `overloaded-iterables`
 
 ## Installation
 
@@ -176,35 +169,3 @@ obj = OverloadedList(*args)
         ```python
             values: Overloadedlist, frequencies: OverloadedList = obj.frequencies
         ```
-
-## Development Setup
-
-1. `git clone https://<personal-access-token>@github.com/Arkiralor/overloaded_iterables.git`
-2. `cd overloaded_aiterables`
-3. `python -m venv env`
-4. `source env/bin/activate`
-   1. `source env/Scripts/activate` for Windows.
-5. `chmod +x scripts/*`
-6. `sh scripts/install.sh` to install all dependencies.
-   1. `sh scripts/uninstall.sh` to uninstall all dependencies (can be very useful if you forgot to activate the `virtualEnvironment` before running `install.sh`).
-7. `sh scripts/generate_coverage_report` && `sh scripts/run_tests.sh` to make sure everything is working as intended.
-
-## Contribution
-
-If you choose to contribute to this package by addressing any of the issues or tickets listed, kindly follow the following workflow.
-
-1. Assign yourself of ask an administrator to assign yourself to the issue.
-2. Clone/fork the codebase and setup the development environment as shown above.
-3. Checkout to your own branch, which should ideally be named what the ticket number is in a url-safe format i.e, if the ticket name is `WEB_003`, then the branch name will be `web-003`.
-4. `git push --set-upstream origin <branchName>` to pre-create the necessary branch on github.
-5. Make the required changes to the correct files in the `src` directory.
-6. Add any testCases required to the correct module/file/class in the `tests` directory.
-7. `sh scripts/run_tests.sh` to make sure no breaking changes were made.
-   1. __MAKE SURE ALL TESTS PASS BEFORE PROCEEDING TO THE NEXT STEP(S)__
-8. Add and commit your changes to your branch with a relevant commit message.
-9. `git merge origin/master` to pull from the master branch to your branch.
-10. `sh scripts/run_tests.sh` again to make sure nothing was broken by the merge.
-    1. __MAKE SURE ALL TESTS PASS BEFORE PROCEEDING TO THE NEXT STEP(S)__
-11. `git push` to push the changes to the remote branch.
-12. Create a Pull Request from your remote branch to `master`.
-    1. If any code changes were requested, execute them as requested and restart from step #6.
