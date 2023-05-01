@@ -1,18 +1,10 @@
 # Overloaded Iterables
 
+[![codecov](https://codecov.io/gh/Arkiralor/overloaded_iterables/branch/master/graph/badge.svg?token=3CZT98MXIK)](https://codecov.io/gh/Arkiralor/overloaded_iterables)
+
 Overloaded versions of the built-in python classes: `<list>` and `<set>`, to include some extra functionalities as an experiment.
 
 An experimental Python package to extend the methods found in Python's built-in list and set classes to add some extra functionality that I, personally find useful in my day-to-day implementations and was too lazy to keep writing/copy-pasting again and again.
-
-## Specifications
-
-1. __Python Version:__
-
-    _Python v3.8+_
-
-2. __Code Coverage:__
-
-    ![_code coverage_](https://github.com/Arkiralor/overloaded_iterables/blob/master/media/screenshots/coverage.PNG?raw=true)
 
 ## Python Package Index
 
