@@ -1,6 +1,6 @@
 # Overloaded Iterables
 
-[![codecov](https://codecov.io/gh/Arkiralor/overloaded_iterables/branch/master/graph/badge.svg?token=3CZT98MXIK)](https://codecov.io/gh/Arkiralor/overloaded_iterables)
+[comment]: [![codecov](https://codecov.io/gh/Arkiralor/overloaded_iterables/branch/master/graph/badge.svg?token=3CZT98MXIK)](https://codecov.io/gh/Arkiralor/overloaded_iterables)
 
 Overloaded versions of the built-in python classes: `<list>` and `<set>`, to include some extra functionalities as an experiment.
 
