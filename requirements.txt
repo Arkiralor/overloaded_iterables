@@ -96,6 +96,8 @@ python-dateutil==2.8.2
     # via
     #   matplotlib
     #   pandas
+python-dotenv==1.0.0
+    # via -r requirements.in
 pytz==2023.3
     # via pandas
 pywin32-ctypes==0.2.0

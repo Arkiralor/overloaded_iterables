@@ -1,43 +1,47 @@
-from os import path
+from os import path, getenv, environ
+
+from dotenv import load_dotenv
 from setuptools import setup, find_packages
 
-def read(fname:str='README.md'):
+_ = load_dotenv(dotenv_path='.env', verbose=True, override=True)
+
+
+def read(fname: str = 'README.md'):
     file_path = path.join(path.dirname(__file__), fname)
     with open(
-        file=file_path, 
-        mode="rt", 
+        file=file_path,
+        mode="rt",
         encoding="utf-8"
     )as file_obj:
         data = file_obj.read()
     return data
 
+
+name = environ['NAME']
+version = environ['VERSION']
+description = getenv('DESCRIPTION', '')
+long_description_content_type = environ['LONG_DESCRIPTION_CONTENT_TYPE']
+author = getenv('AUTHOR')
+author_email = environ['AUTHOR_EMAIL']
+package_location = environ['FIND_PACKAGES_ARGS']
+package_dir = {'': package_location}
+url = getenv('URL')
+keywords = getenv('KEYWORDS', '').split(',')
+classifiers = getenv('CLASSIFIERS', '').split(',')
+
 setup(
-    name='overloaded-iterables',
-    version='0.7.0',
-    description="Overloaded version of the built-in python classes: list and set to include some extra functionalities.",
+    name=name,
+    version=version,
+    description=description,
     long_description=read('README.md'),
-    long_description_content_type='text/markdown',
+    long_description_content_type=long_description_content_type,
     license='MIT',
-    author="Prithoo Medhi",
-    author_email='prithoo11335@gmail.com',
-    packages=find_packages('src'),
-    package_dir={'': 'src'},
-    url='https://github.com/Arkiralor/overloaded_iterables',
-    keywords= [
-        'python',
-        'built-in overloading',
-        'sequence',
-        'overloading',
-        'median',
-        'rms',
-        'root-mean-square',
-        'mean',
-        'sort',
-        'graph',
-        'histogram',
-        'scatterplot',
-        'line-plot'
-    ],
+    author=author,
+    author_email=author_email,
+    packages=find_packages(where=package_location),
+    package_dir=package_dir,
+    url=url,
+    keywords=keywords,
     install_requires=[
         "matplotlib",
         "numpy"
@@ -47,12 +51,8 @@ setup(
         "ubuntu-linux",
         "mac-os"
     ],
-    classifiers=[
-        "Development Status :: 3 - Alpha",
-        "Topic :: Utilities",
-        "License :: OSI Approved :: MIT License",
-    ],
+    classifiers=classifiers,
 )
 
-if __name__=="__main__":
+if __name__ == "__main__":
     pass

@@ -6,4 +6,5 @@ pandas
 pytest
 pytest-cov
 pytest-html
+python-dotenv
 twine
