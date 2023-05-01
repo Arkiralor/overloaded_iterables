@@ -292,10 +292,7 @@ class OverloadedList(list):
 
         I might be grossly mistaken in this however so feel free to correct me (with proof, kindly).
         """
-        count = 0
-        for _ in self:
-            count = count + 1
-        return count
+        return len(self)
 
     @property
     def frequencies(self):
@@ -433,7 +430,4 @@ class OverloadedSet(set):
 
         I might be grossly mistaken in this however so feel free to correct me (with proof, kindly).
         """
-        count = 0
-        for _ in self:
-            count = count + 1
-        return count
+        return len(self)
