@@ -1,7 +1,6 @@
 from datetime import datetime
 from os import path
 from typing import List
-from typing_extensions import SupportsIndex
 
 import matplotlib.pyplot as plt
 from numpy import ndarray, array
@@ -345,13 +344,14 @@ class Queue(OverloadedList):
             )
         elif num < self.len:
             try:
-                new_list = []
-                new_list = self[num-1::]
-                self = self._type(new_list)
+                new_queue = self._type(self[num::1])
+                self.clear()
+                self.extend(new_queue)
             except Exception as ex:
                 raise ex
         else:
-            return self._type([])
+            ## i.e, `num` == `self.len`
+            self = self._type([])
 
 
 class Stack(OverloadedList):
@@ -379,16 +379,17 @@ class Stack(OverloadedList):
             raise ValueError(
                 f"Not enough items ({num}) in <Stack> object"
             )
-        elif num > self.len:
+        elif num < self.len:
             try:
-                new_list = []
-                new_list = self[0:(0-num):1]
-                self = self._type(new_list)
+                new_stack = self._type(self[:(0-num):1])
+                self.clear()
+                self.extend(new_stack)
             except Exception as ex:
                 raise ex
 
         else:
-            return self._type([])
+            ## i.e, `num` == `self.len`
+            self = self._type([])
 
 
 class OverloadedSet(set):

@@ -227,69 +227,117 @@ class TestOverloadedList(unittest.TestCase):
 
 class TestQueue(unittest.TestCase):
 
+    iZERO: int = 0
+    iONE: int = 1
+
     def setUp(self):
         """
         Create a random `Queue` object.
         """
-        self.VALID_NUMBERS = OverloadedList([num for num in range(0, 25)])
+        self.VALID_NUMBERS = OverloadedList([num for num in range(self.iZERO, 25)])
 
-        self.ARR = Queue([choice(self.VALID_NUMBERS) for _ in range(1, 501)])
+        self.ARR = Queue([choice(self.VALID_NUMBERS) for _ in range(self.iONE, 501)])
         
     def test_insert_one(self):
+        """
+        Tests to see that if a single element was added, it was added to the end of the queue.
+        """
         _choice = choice(self.VALID_NUMBERS)
 
         self.ARR.insert(_choice)
         self.assertEqual(_choice, self.ARR[self.ARR.len-1])
 
     def test_insert_many(self):
+        """
+        Tests to see that if `n` elements were inserted then the
+        last `n` elements of the array should exactly be the `n` elements inserted.
+        """
         insertion_elements = choice([i for i in range(3, 13)])
-        inserted_seq = [choice(self.VALID_NUMBERS) for _ in insertion_elements]
+        inserted_seq = [choice(self.VALID_NUMBERS) for _ in range(0, insertion_elements)]
         self.ARR.insert(inserted_seq)
 
-        self.assertSequenceEqual(inserted_seq, self.ARR[(0-insertion_elements):-1:1])
+        self.assertSequenceEqual(inserted_seq, self.ARR[(0-insertion_elements)::1])
 
-    def test_pop_one(self):
-        to_be_inserted = choice(self.VALID_NUMBERS)
+    def test_pop_one_via_length(self):
+        """
+        Tests length after popping since testing last element is not conclusive as 
+        the save value can be both: the last element and the second-to-last element.
+        """
         _len = self.ARR.len
-        self.ARR.insert(to_be_inserted)
-        self.assertEqual(_len, self.ARR.len)
+        self.ARR.pop()
+        self.assertEqual(_len-1, self.ARR.len)
 
-    def test_pop_many(self):
-        insertion_elements = choice([i for i in range(3, 13)])
-        inserted_seq = [choice(self.VALID_NUMBERS) for _ in insertion_elements]
-        self.ARR.insert(inserted_seq)
+    def test_pop_many_via_length(self):
+        """
+        If the number of popped elements (`n`) is less than the length of the <queue> object,
+        check that the length of the queue has reduced by `n` elements.
+        - This will always happen due to the nature of the test written.
+        """
+        ## Taking a random number (-- [3, 12]
+        number_of_pops = choice([i for i in range(3, 13)]) ## This is the number of elements to insert before popping.
+        ## Record length of <queue> object before popping.
         _len = self.ARR.len
+        self.ARR.pop(number_of_pops)
+        self.assertEqual(_len-number_of_pops, self.ARR.len)
 
-        self.ARR.pop(insertion_elements)
-        if self.ARR.len > insertion_elements:
-            self.assertFalse(inserted_seq, self.ARR[(0-insertion_elements):-1:1])
-        else:
-            self.assertEqual((_len-insertion_elements), self.ARR.len)
 
 
 
 class TestStack(unittest.TestCase):
 
+    iZERO: int = 0
+
     def setUp(self):
         """
-        Create a random `Queue` object.
+        Create a random `Stack` object.
         """
-        self.VALID_NUMBERS = OverloadedList([num for num in range(0, 25)])
+        self.VALID_NUMBERS = OverloadedList([num for num in range(self.iZERO, 25)])
 
         self.ARR = Stack([choice(self.VALID_NUMBERS) for _ in range(1, 501)])
 
     def test_insert_one(self):
+        """
+        Tests to see that if a single element was added, it was added to the end of the stack.
+        """
         _choice = choice(self.VALID_NUMBERS)
 
         self.ARR.insert(_choice)
         self.assertEqual(_choice, self.ARR[self.ARR.len-1])
 
     def test_insert_many(self):
+        """
+        Tests to see that if `n` elements were inserted then the
+        last `n` elements of the array should exactly be the `n` elements inserted.
+        """
         insertion_elements = choice([i for i in range(3, 13)])
-        inserted_seq = [choice(self.VALID_NUMBERS) for _ in insertion_elements]
+        inserted_seq = [choice(self.VALID_NUMBERS) for _ in range(self.iZERO, insertion_elements)]
         self.ARR.insert(inserted_seq)
 
-        self.assertSequenceEqual(inserted_seq, self.ARR[(0-insertion_elements):-1:1])
+        self.assertSequenceEqual(inserted_seq, self.ARR[(self.iZERO-insertion_elements)::1])
+
+    def test_pop_one_via_length(self):
+        """
+        Tests length after popping since testing last element is not conclusive as 
+        the save value can be both: the last element and the second-to-last element.
+        """
+        _len = self.ARR.len
+        self.ARR.pop()
+        self.assertEqual(_len-1, self.ARR.len)
+
+    def test_pop_many_via_length(self):
+        """
+        If the number of popped elements (`n`) is less than the length of the <stack> object,
+        check that the length of the stack has reduced by `n` elements.
+        - This will always happen due to the nature of the test written.
+        """
+        ## Taking a random number (-- [3, 12]
+        number_of_pops = choice([i for i in range(3, 13)]) ## This is the number of elements to insert before popping.
+        _len = self.ARR.len
+        self.ARR.pop(number_of_pops)
+        self.assertEqual(_len-number_of_pops, self.ARR.len)
+        
+
+
 
 
 class TestOverloadedSet(unittest.TestCase):
