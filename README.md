@@ -239,7 +239,7 @@ The following are the functions, methods and properties belonging to the inherit
 
         ```python
             queue = Queue(*args)
-            stack = Stavk(*args)
+            stack = Stack(*args)
             queue.pop(num=num)
             stack.pop(num=num)
         ```
