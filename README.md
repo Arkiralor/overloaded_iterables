@@ -43,7 +43,7 @@ obj = Queue(*args)
 
 ### 3. Stack
 
-- A non-datatype constrained, single-dimensional collection of values that follows the _first-in-last-out __(FiLo)___ principle for insertions and deletion i.e, insertions and deletions, bot will be made to the end of the sequence.
+- A non-datatype constrained, single-dimensional collection of values that follows the _first-in-last-out __(FiLo)___ principle for insertions and deletion i.e, insertions and deletions, both will be made to the end of the sequence.
 - Inherits solely from the `<OverloadedList>` class.
 
 ```python
@@ -205,7 +205,7 @@ obj = Stack(*args)
 
 1. `<class>.insert()`
 
-    - Inserts `num` elements towards the end of the object.
+    - Inserts `value` towards the end of the object.
     - Arguments: `self`, `value: any`
     - Returns: `None` _(is an in-place method)_
     - Example:
