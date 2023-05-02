@@ -260,7 +260,7 @@ The following are the functions, methods and properties belonging to the inherit
 
 If you choose to contribute to this package by addressing any of the issues or tickets listed, kindly follow the following workflow.
 
-1. Assign yourself of ask an administrator to assign yourself to the issue.
+1. Assign yourself or ask an administrator to assign yourself to the issue.
 2. Clone/fork the codebase and setup the development environment as shown above.
 3. Checkout to your own branch, which should ideally be named what the ticket number is in a url-safe format i.e, if the ticket name is `WEB_003`, then the branch name will be `web-003`.
 4. `git push --set-upstream origin <branchName>` to pre-create the necessary branch on github.
