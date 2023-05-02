@@ -190,7 +190,7 @@ class TestOverloadedList(unittest.TestCase):
         Test that the .hist() method saves the plot to the correct directory when the `save_dir` argument is passed.
         """
         self.hist_name = self.ARR_1.hist(
-            bins=self.ARR_1.len//10, 
+            bins=self.ARR_1.len//10,
             save_dir=self.GRAPH_DIR, name='hist', histtype='step', title='random_hist')
         self.assertTrue(path.exists(path.join(self.GRAPH_DIR, self.hist_name)))
 
@@ -226,6 +226,9 @@ class TestOverloadedList(unittest.TestCase):
 
 
 class TestQueue(unittest.TestCase):
+    """
+    Test-cases for the `Queue` class.
+    """
 
     iZERO: int = 0
     iONE: int = 1
@@ -234,10 +237,12 @@ class TestQueue(unittest.TestCase):
         """
         Create a random `Queue` object.
         """
-        self.VALID_NUMBERS = OverloadedList([num for num in range(self.iZERO, 25)])
+        self.VALID_NUMBERS = OverloadedList(
+            [num for num in range(self.iZERO, 25)])
 
-        self.ARR = Queue([choice(self.VALID_NUMBERS) for _ in range(self.iONE, 501)])
-        
+        self.ARR = Queue([choice(self.VALID_NUMBERS)
+                         for _ in range(self.iONE, 501)])
+
     def test_insert_one(self):
         """
         Tests to see that if a single element was added, it was added to the end of the queue.
@@ -253,10 +258,12 @@ class TestQueue(unittest.TestCase):
         last `n` elements of the array should exactly be the `n` elements inserted.
         """
         insertion_elements = choice([i for i in range(3, 13)])
-        inserted_seq = [choice(self.VALID_NUMBERS) for _ in range(0, insertion_elements)]
+        inserted_seq = [choice(self.VALID_NUMBERS)
+                        for _ in range(0, insertion_elements)]
         self.ARR.insert(inserted_seq)
 
-        self.assertSequenceEqual(inserted_seq, self.ARR[(0-insertion_elements)::1])
+        self.assertSequenceEqual(
+            inserted_seq, self.ARR[(0-insertion_elements)::1])
 
     def test_pop_one_via_length(self):
         """
@@ -273,17 +280,19 @@ class TestQueue(unittest.TestCase):
         check that the length of the queue has reduced by `n` elements.
         - This will always happen due to the nature of the test written.
         """
-        ## Taking a random number (-- [3, 12]
-        number_of_pops = choice([i for i in range(3, 13)]) ## This is the number of elements to insert before popping.
-        ## Record length of <queue> object before popping.
+        # Taking a random number (-- [3, 12]
+        # This is the number of elements to insert before popping.
+        number_of_pops = choice([i for i in range(3, 13)])
+        # Record length of <queue> object before popping.
         _len = self.ARR.len
         self.ARR.pop(number_of_pops)
         self.assertEqual(_len-number_of_pops, self.ARR.len)
 
 
-
-
 class TestStack(unittest.TestCase):
+    """
+    Test-cases for the `Stack` class.
+    """
 
     iZERO: int = 0
 
@@ -291,7 +300,8 @@ class TestStack(unittest.TestCase):
         """
         Create a random `Stack` object.
         """
-        self.VALID_NUMBERS = OverloadedList([num for num in range(self.iZERO, 25)])
+        self.VALID_NUMBERS = OverloadedList(
+            [num for num in range(self.iZERO, 25)])
 
         self.ARR = Stack([choice(self.VALID_NUMBERS) for _ in range(1, 501)])
 
@@ -310,10 +320,12 @@ class TestStack(unittest.TestCase):
         last `n` elements of the array should exactly be the `n` elements inserted.
         """
         insertion_elements = choice([i for i in range(3, 13)])
-        inserted_seq = [choice(self.VALID_NUMBERS) for _ in range(self.iZERO, insertion_elements)]
+        inserted_seq = [choice(self.VALID_NUMBERS)
+                        for _ in range(self.iZERO, insertion_elements)]
         self.ARR.insert(inserted_seq)
 
-        self.assertSequenceEqual(inserted_seq, self.ARR[(self.iZERO-insertion_elements)::1])
+        self.assertSequenceEqual(
+            inserted_seq, self.ARR[(self.iZERO-insertion_elements)::1])
 
     def test_pop_one_via_length(self):
         """
@@ -330,14 +342,12 @@ class TestStack(unittest.TestCase):
         check that the length of the stack has reduced by `n` elements.
         - This will always happen due to the nature of the test written.
         """
-        ## Taking a random number (-- [3, 12]
-        number_of_pops = choice([i for i in range(3, 13)]) ## This is the number of elements to insert before popping.
+        # Taking a random number (-- [3, 12]
+        # This is the number of elements to insert before popping.
+        number_of_pops = choice([i for i in range(3, 13)])
         _len = self.ARR.len
         self.ARR.pop(number_of_pops)
         self.assertEqual(_len-number_of_pops, self.ARR.len)
-        
-
-
 
 
 class TestOverloadedSet(unittest.TestCase):
