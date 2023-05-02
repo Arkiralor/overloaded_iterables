@@ -351,7 +351,7 @@ class Queue(OverloadedList):
                 raise ex
         else:
             ## i.e, `num` == `self.len`
-            self = self._type([])
+            self.clear()
 
 
 class Stack(OverloadedList):
@@ -369,7 +369,6 @@ class Stack(OverloadedList):
         if value is not None and not type_check:
             self.append(value)
         elif value is not None and type_check:
-            print(f"extending {value} to the stack")
             self.extend(value)
 
     def pop(self, num:int=1):
@@ -390,7 +389,7 @@ class Stack(OverloadedList):
 
         else:
             ## i.e, `num` == `self.len`
-            self = self._type([])
+            self = self.clear()
 
 
 class OverloadedSet(set):
