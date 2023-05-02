@@ -63,9 +63,18 @@ obj = Stack(*args)
     obj = OverloadedSet(*args)
 ```
 
-## Functions and Methods (OverloadedList and OverloadedSet)
+## Functions and Methods
+
+The functions, methods and properties are categorised into two segments: for the base classes (`OverloadedList` and `OverloadedSet`) and for the
+inheriting classes (`Queue` and `Stack`)
 
 ### OverloadedList and OverloadedSet
+
+The following are the functions, methods and properties belonging to the base classes.
+
+`OverloadedList` being a daughter of the `<list>` class, inherits all of its associated methods and properties as well, such as `append()`, `extend()`, `count()`, _et cetera_.
+
+`OverloadedSet` being a daughter of the `<set>` class, inherits all of its associated methods and properties as well, such as `add()`, `clear()`, `difference()`, _et cetera_.
 
 1. `<class>.mean()`
     - Find the [mean](https://en.wikipedia.org/wiki/Arithmetic_mean) of the values in the given iterable class object.
@@ -202,6 +211,10 @@ obj = Stack(*args)
         ```
 
 ### Queue and Stack
+
+The following are the functions, methods and properties belonging to the inheriting (daughter) classes.
+
+`Queue` and `Stack` being daughters of the `OverloadedList` class, inherit all of its associated methods and properties as well, such as `mean()`, `rms()`, `frequencies`, _et cetera_.
 
 1. `<class>.insert()`
 
