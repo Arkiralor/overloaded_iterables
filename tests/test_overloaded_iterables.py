@@ -309,10 +309,11 @@ class TestStack(unittest.TestCase):
         """
         Tests to see that if a single element was added, it was added to the end of the stack.
         """
-        _choice = choice(self.VALID_NUMBERS)
+        # _choice = choice(self.VALID_NUMBERS)
+        _choice = 0
 
         self.ARR.insert(_choice)
-        self.assertEqual(_choice, self.ARR[self.ARR.len-1])
+        self.assertEqual(_choice, self.ARR[-1])
 
     def test_insert_many(self):
         """

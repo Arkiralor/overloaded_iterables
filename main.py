@@ -32,7 +32,8 @@ def main():
     s = Stack([1,2,3,4,5,6])
     print(f"S (original):\t\t{s}")
     s.insert(7)
-    print(f"S (1 inserted):\t\t{s}")
+    s.insert(0)
+    print(f"S (2 inserted):\t\t{s}")
     s.pop()
     print(f"S (1 popped):\t\t{s}")
 

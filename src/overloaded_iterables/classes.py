@@ -329,9 +329,9 @@ class Queue(OverloadedList):
         Insert a single or sequence of values to the end of the Queue object.
         """
         type_check = (type(value) == list or type(value) == set or type(value) == OverloadedList or type(value) == OverloadedSet or type(value) == tuple)
-        if value and not type_check:
+        if value is not None and not type_check:
             self.append(value)
-        elif value and type_check:
+        elif value is not None and type_check:
             self.extend(value)
 
     def pop(self, num: int = 1) -> None:
@@ -366,9 +366,10 @@ class Stack(OverloadedList):
         Insert a single or sequence of values to the end of the Stack object.
         """
         type_check = (type(value) == list or type(value) == set or type(value) == OverloadedList or type(value) == OverloadedSet or type(value) == tuple)
-        if value and not type_check:
+        if value is not None and not type_check:
             self.append(value)
-        elif value and type_check:
+        elif value is not None and type_check:
+            print(f"extending {value} to the stack")
             self.extend(value)
 
     def pop(self, num:int=1):
