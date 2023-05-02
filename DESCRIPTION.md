@@ -23,7 +23,29 @@ from overloaded_iterables.classes import OverloadedList
 obj = OverloadedList(*args)
 ```
 
-### 2. OverloadedSet
+### 2. Queue
+
+- A non-datatype constrained, single-dimensional collection of values that follows the _first-in-first-out __(FiFo)___ principle for insertions and deletion i.e, insertions will be made to the end of the sequence while deletions will be made to the beginning of the sequence.
+- Inherits solely from the `<OverloadedList>` class.
+
+```python
+from overloaded_iterables.classes import Queue
+
+obj = Queue(*args)
+```
+
+### 3. Stack
+
+- A non-datatype constrained, single-dimensional collection of values that follows the _first-in-last-out __(FiLo)___ principle for insertions and deletion i.e, insertions and deletions, both will be made to the end of the sequence.
+- Inherits solely from the `<OverloadedList>` class.
+
+```python
+from overloaded_iterables.classes import Stack
+
+obj = Stack(*args)
+```
+
+### 4. OverloadedSet
 
 - A non-datatype constrained, single-dimensional collection of __unique__ values.
 - Inherits solely from Python's built-in `<set>` class.
@@ -35,6 +57,17 @@ obj = OverloadedList(*args)
 ```
 
 ## Functions and Methods
+
+The functions, methods and properties are categorised into two segments: for the base classes (`OverloadedList` and `OverloadedSet`) and for the
+inheriting classes (`Queue` and `Stack`)
+
+### OverloadedList and OverloadedSet
+
+The following are the functions, methods and properties belonging to the base classes.
+
+`OverloadedList` being a daughter of the `<list>` class, inherits all of its associated methods and properties as well, such as `append()`, `extend()`, `count()`, _et cetera_.
+
+`OverloadedSet` being a daughter of the `<set>` class, inherits all of its associated methods and properties as well, such as `add()`, `clear()`, `difference()`, _et cetera_.
 
 1. `<class>.mean()`
     - Find the [mean](https://en.wikipedia.org/wiki/Arithmetic_mean) of the values in the given iterable class object.
@@ -168,4 +201,38 @@ obj = OverloadedList(*args)
 
         ```python
             values: Overloadedlist, frequencies: OverloadedList = obj.frequencies
+        ```
+
+### Queue and Stack
+
+The following are the functions, methods and properties belonging to the inheriting (daughter) classes.
+
+`Queue` and `Stack` being daughters of the `OverloadedList` class, inherit all of its associated methods and properties as well, such as `mean()`, `rms()`, `frequencies`, _et cetera_.
+
+1. `<class>.insert()`
+
+    - Inserts `value` towards the end of the object.
+    - Arguments: `self`, `value: any`
+    - Returns: `None` _(is an in-place method)_
+    - Example:
+
+        ```python
+            queue = Queue(*args)
+            stack = Stavk(*args)
+            queue.insert(value=value)
+            stack.insert(value=value)
+        ```
+
+2. `<class>.pop()`
+
+    - Deletes `num` elements from the beginning of the object in case of `Queue` and from the end of the object in case of `Stack`.
+    - Arguments: `self`, `num: int | default: 1`
+    - Returns: `None` _(is an in-place method)_
+    - Example:
+
+        ```python
+            queue = Queue(*args)
+            stack = Stavk(*args)
+            queue.pop(num=num)
+            stack.pop(num=num)
         ```
