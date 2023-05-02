@@ -1,6 +1,7 @@
 from datetime import datetime
 from os import path
 from typing import List
+from typing_extensions import SupportsIndex
 
 import matplotlib.pyplot as plt
 from numpy import ndarray, array
@@ -12,7 +13,7 @@ class OverloadedList(list):
     """
     iZERO: int = 0
     fZERO: float = 0.0
-    TIME_FORMAT:str = '%Y-%m-%dT%H-%M-%S.%fZ%z'
+    TIME_FORMAT: str = '%Y-%m-%dT%H-%M-%S.%fZ%z'
 
     def mean(self) -> float:
         """
@@ -111,8 +112,8 @@ class OverloadedList(list):
         orientation: str = 'vertical',
         log_scale: bool = False,
         show: bool = False,
-        dpi: int=300,
-        pad_inches: float=1,
+        dpi: int = 300,
+        pad_inches: float = 1,
         *args,
         **kwargs
     ) -> bool:
@@ -155,7 +156,7 @@ class OverloadedList(list):
                 pass
             else:
                 raise ValueError("Something went wrong.")
-            
+
             plt.clf()
             return True
         except Exception as ex:
@@ -174,8 +175,8 @@ class OverloadedList(list):
             markerfacecolor: str = '#252525',
             marker_size: float = 1.0,
             show: bool = False,
-            dpi: int=300,
-            pad_inches: float=1,
+            dpi: int = 300,
+            pad_inches: float = 1,
             *args,
             **kwargs
     ):
@@ -196,7 +197,7 @@ class OverloadedList(list):
             if save_dir and not show:
                 file_name = f"{file_name.lower().strip()}.PNG" if file_name else f"{title.lower().strip()}__plot__{datetime.utcnow().strftime(self.TIME_FORMAT)}.PNG"
                 save_path = path.join(save_dir, file_name)
-                
+
                 plt.savefig(fname=save_path, dpi=dpi, pad_inches=pad_inches)
 
                 return file_name
@@ -210,7 +211,7 @@ class OverloadedList(list):
                 pass
             else:
                 raise ValueError("Something went wrong.")
-            
+
             plt.clf()
             return True
         except Exception as ex:
@@ -228,8 +229,8 @@ class OverloadedList(list):
             marker: str = ',',
             line_width: float = 2,
             show: bool = False,
-            dpi: int=300,
-            pad_inches: float=1,
+            dpi: int = 300,
+            pad_inches: float = 1,
             *args,
             **kwargs
     ):
@@ -240,7 +241,8 @@ class OverloadedList(list):
             x_axis, y_axis = self.frequencies
             x_axis = array(x_axis)
             y_axis = array(y_axis)
-            plt.scatter(x=x_axis, y=y_axis, s=array(size), color=color, marker=marker, linewidths=line_width)
+            plt.scatter(x=x_axis, y=y_axis, s=array(size),
+                        color=color, marker=marker, linewidths=line_width)
             plt.title(title)
             plt.xlabel(x_label)
             plt.ylabel(y_label)
@@ -249,7 +251,7 @@ class OverloadedList(list):
             if save_dir and not show:
                 file_name = f"{file_name.lower().strip()}.PNG" if file_name else f"{title.lower().strip()}__scatter__{datetime.utcnow().strftime(self.TIME_FORMAT)}.PNG"
                 save_path = path.join(save_dir, file_name)
-                
+
                 plt.savefig(fname=save_path, dpi=dpi, pad_inches=pad_inches)
 
                 return file_name
@@ -263,7 +265,7 @@ class OverloadedList(list):
                 pass
             else:
                 raise ValueError("Something went wrong.")
-            
+
             plt.clf()
             return True
         except Exception as ex:
@@ -314,6 +316,79 @@ class OverloadedList(list):
             return values, frequencies
         except Exception:
             return type(self)(), type(self)()
+
+
+class Queue(OverloadedList):
+    """
+    Queue implementation of `OverloadedList`.
+
+    Follows first-in-first-out (fifo).
+    """
+
+    def insert(self, value: any = None) -> None:
+        """
+        Insert a single or sequence of values to the end of the Queue object.
+        """
+        type_check = (type(value) == list or type(value) == set or type(value) == OverloadedList or type(value) == OverloadedSet or type(value) == tuple)
+        if value and not type_check:
+            self.append(value)
+        elif value and type_check:
+            self.extend(value)
+
+    def pop(self, num: int = 1) -> None:
+        """
+        Remove the first `num: int | default: 1` elements of the Queue.
+        """
+        if num > self.len:
+            raise ValueError(
+                f"Not enough items ({num}) in <Stack> object"
+            )
+        elif num < self.len:
+            try:
+                new_list = []
+                new_list = self[num-1::]
+                self = self._type(new_list)
+            except Exception as ex:
+                raise ex
+        else:
+            return self._type([])
+
+
+class Stack(OverloadedList):
+    """
+    Stack implementation of `OverloadedList`.
+
+    Follows first-in-last-out (filo).
+    """
+
+    def insert(self, value:any=None)->None:
+        """
+        Insert a single or sequence of values to the end of the Stack object.
+        """
+        type_check = (type(value) == list or type(value) == set or type(value) == OverloadedList or type(value) == OverloadedSet or type(value) == tuple)
+        if value and not type_check:
+            self.append(value)
+        elif value and type_check:
+            self.extend(value)
+
+    def pop(self, num:int=1):
+        """
+        Remove the latest `num: int | default: 1` elements from the top (highest index) of the stack
+        """
+        if num > self.len:
+            raise ValueError(
+                f"Not enough items ({num}) in <Stack> object"
+            )
+        elif num > self.len:
+            try:
+                new_list = []
+                new_list = self[0:(0-num):1]
+                self = self._type(new_list)
+            except Exception as ex:
+                raise ex
+
+        else:
+            return self._type([])
 
 
 class OverloadedSet(set):
