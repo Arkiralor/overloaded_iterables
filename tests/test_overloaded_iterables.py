@@ -1,11 +1,12 @@
 from math import prod
-from os import path, makedirs, remove
+from os import path, makedirs, remove, environ
 from pathlib import Path
 from pytest import mark
 import unittest
 from secrets import choice
 from statistics import mean, median
 
+from dotenv import load_dotenv
 import numpy as np
 
 from src.overloaded_iterables.classes import OverloadedList, Queue, Stack, OverloadedSet
@@ -15,6 +16,9 @@ class TestOverloadedList(unittest.TestCase):
     """
     Test-cases for the `OverloadedList` class.
     """
+    load_dotenv()
+
+    DO_NOT_TEST_ALL:bool = eval(environ.get('DO_NOT_TEST_ALL', 'False'))
 
     def setUp(self):
         """
@@ -167,24 +171,28 @@ class TestOverloadedList(unittest.TestCase):
 
         self.assertEqual(self.ARR_1.rms(), root_mean_squared)
 
+    @mark.skipif(DO_NOT_TEST_ALL, reason="Only run for new logic validation.")
     def test_hist(self):
         """
         Test the .hist() method for the correct return value.
         """
         self.assertTrue(self.ARR_1.hist())
 
+    @mark.skipif(DO_NOT_TEST_ALL, reason="Only run for new logic validation.")
     def test_plot(self):
         """
         Test the .plot() method for the correct return value.
         """
         self.assertTrue(self.ARR_1.plot())
 
+    @mark.skipif(DO_NOT_TEST_ALL, reason="Only run for new logic validation.")
     def test_scatter(self):
         """
         Test the .scatter() method for the correct return value.
         """
         self.assertTrue(self.ARR_1.scatter())
 
+    @mark.skipif(DO_NOT_TEST_ALL, reason="Only run for new logic validation.")
     def test_hist_file(self):
         """
         Test that the .hist() method saves the plot to the correct directory when the `save_dir` argument is passed.
@@ -194,6 +202,7 @@ class TestOverloadedList(unittest.TestCase):
             save_dir=self.GRAPH_DIR, name='hist', histtype='step', title='random_hist')
         self.assertTrue(path.exists(path.join(self.GRAPH_DIR, self.hist_name)))
 
+    @mark.skipif(DO_NOT_TEST_ALL, reason="Only run for new logic validation.")
     def test_plot_file(self):
         """
         Test that the .plot() method saves the plot to the correct directory when the `save_dir` argument is passed.
@@ -202,6 +211,7 @@ class TestOverloadedList(unittest.TestCase):
             save_dir=self.GRAPH_DIR, name='plot', title='random_plot')
         self.assertTrue(path.exists(path.join(self.GRAPH_DIR, self.plot_name)))
 
+    @mark.skipif(DO_NOT_TEST_ALL, reason="Only run for new logic validation.")
     def test_scatter_file(self):
         """
         Test that the .scatter() method saves the plot to the correct directory when the `save_dir` argument is passed.
@@ -229,6 +239,9 @@ class TestQueue(unittest.TestCase):
     """
     Test-cases for the `Queue` class.
     """
+    load_dotenv()
+
+    DO_NOT_TEST_ALL:bool = eval(environ.get('DO_NOT_TEST_ALL', 'True'))
 
     iZERO: int = 0
     iONE: int = 1
@@ -283,16 +296,36 @@ class TestQueue(unittest.TestCase):
         # Taking a random number (-- [3, 12]
         # This is the number of elements to insert before popping.
         number_of_pops = choice([i for i in range(3, 13)])
-        # Record length of <queue> object before popping.
+        # Record length of <queue> object before popping.        
         _len = self.ARR.len
         self.ARR.pop(number_of_pops)
         self.assertEqual(_len-number_of_pops, self.ARR.len)
+
+    @mark.skipif(DO_NOT_TEST_ALL, reason="Redundant test in deployment.")
+    def test_pop_many_via_sequence(self):
+        """
+        Check that the the subsequence at the start of the queue is not the same as the one before executing the pop.
+
+        NOTE: This test may fail sometimes simply because there is a significantly low but not zero chance that the same sequence can repeat in a queue.
+        """
+        # Taking a random number (-- [3, 12]
+        # This is the number of elements to insert before popping.
+        number_of_pops = choice([i for i in range(3, 13)])
+        len_before_popping = self.ARR.len
+        seq_to_be_popped = self.ARR[:number_of_pops:]
+        
+        self.ARR.pop(number_of_pops)
+        self.assertFalse((seq_to_be_popped == self.ARR[:number_of_pops:]) 
+                         and ((len_before_popping-number_of_pops) != self.ARR.len))
 
 
 class TestStack(unittest.TestCase):
     """
     Test-cases for the `Stack` class.
     """
+    load_dotenv()
+
+    DO_NOT_TEST_ALL:bool = eval(environ.get('DO_NOT_TEST_ALL', 'True'))
 
     iZERO: int = 0
 
@@ -349,6 +382,23 @@ class TestStack(unittest.TestCase):
         _len = self.ARR.len
         self.ARR.pop(number_of_pops)
         self.assertEqual(_len-number_of_pops, self.ARR.len)
+
+    @mark.skipif(DO_NOT_TEST_ALL, reason="Redundant test in deployment.")
+    def test_pop_many_via_sequence(self):
+        """
+        Check that the the subsequence at the end of the queue is not the same as the one before executing the pop.
+
+        NOTE: This test may fail sometimes simply because there is a significantly low but not zero chance that the same sequence can repeat in a queue.
+        """
+        # Taking a random number (-- [3, 12]
+        # This is the number of elements to insert before popping.
+        number_of_pops = choice([i for i in range(3, 13)])
+        len_before_popping = self.ARR.len
+        seq_to_be_popped = self.ARR[number_of_pops::]
+        
+        self.ARR.pop(number_of_pops)
+        self.assertFalse((seq_to_be_popped == self.ARR[:number_of_pops:]) 
+                         and ((len_before_popping-number_of_pops) != self.ARR.len))
 
 
 class TestOverloadedSet(unittest.TestCase):

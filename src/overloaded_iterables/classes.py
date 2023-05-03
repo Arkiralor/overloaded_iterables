@@ -139,21 +139,23 @@ class OverloadedList(list):
             plt.grid(visible=True, which='both', axis='both')
 
             if save_dir and not show:
-                file_name = f"{file_name.lower().strip()}.PNG" if file_name else f"{title.lower().strip()}__hist__{datetime.utcnow().strftime(self.TIME_FORMAT)}.PNG"
+                file_name = f"{file_name.lower().strip()}.PNG" if file_name else f"{title.lower().strip()}__scatter__{datetime.utcnow().strftime(self.TIME_FORMAT)}.PNG"
                 save_path = path.join(save_dir, file_name)
 
                 plt.savefig(fname=save_path, dpi=dpi, pad_inches=pad_inches)
-
+                plt.clf()
                 return file_name
             elif show and not save_dir:
                 plt.show()
             elif save_dir and show:
+                plt.clf()
                 raise AttributeError(
                     "Both `show` and `save_dir` cannot be defined."
                 )
             elif not show and not save_dir:
-                pass
+                plt.clf()
             else:
+                plt.clf()
                 raise ValueError("Something went wrong.")
 
             plt.clf()
@@ -194,21 +196,23 @@ class OverloadedList(list):
             plt.grid(visible=True, which='both', axis='both')
 
             if save_dir and not show:
-                file_name = f"{file_name.lower().strip()}.PNG" if file_name else f"{title.lower().strip()}__plot__{datetime.utcnow().strftime(self.TIME_FORMAT)}.PNG"
+                file_name = f"{file_name.lower().strip()}.PNG" if file_name else f"{title.lower().strip()}__scatter__{datetime.utcnow().strftime(self.TIME_FORMAT)}.PNG"
                 save_path = path.join(save_dir, file_name)
 
                 plt.savefig(fname=save_path, dpi=dpi, pad_inches=pad_inches)
-
+                plt.clf()
                 return file_name
             elif show and not save_dir:
                 plt.show()
             elif save_dir and show:
+                plt.clf()
                 raise AttributeError(
                     "Both `show` and `save_dir` cannot be defined."
                 )
             elif not show and not save_dir:
-                pass
+                plt.clf()
             else:
+                plt.clf()
                 raise ValueError("Something went wrong.")
 
             plt.clf()
@@ -252,17 +256,19 @@ class OverloadedList(list):
                 save_path = path.join(save_dir, file_name)
 
                 plt.savefig(fname=save_path, dpi=dpi, pad_inches=pad_inches)
-
+                plt.clf()
                 return file_name
             elif show and not save_dir:
                 plt.show()
             elif save_dir and show:
+                plt.clf()
                 raise AttributeError(
                     "Both `show` and `save_dir` cannot be defined."
                 )
             elif not show and not save_dir:
-                pass
+                plt.clf()
             else:
+                plt.clf()
                 raise ValueError("Something went wrong.")
 
             plt.clf()
